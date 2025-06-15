@@ -108,7 +108,7 @@ IconData getWeatherIconFromTemp(double tempCelsius) {
 
 Map<int, String> getNextFiveDaysMap() {
   final now = DateTime.now();
-  final formatter = DateFormat('EEEE, dd MMMM'); // Example: Monday, 02 June
+  final formatter = DateFormat('EEEE, dd MMMM');
 
   return {
     for (int i = 0; i < 5; i++) i: formatter.format(now.add(Duration(days: i))),

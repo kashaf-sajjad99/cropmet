@@ -6,11 +6,7 @@ class HiveService {
     try {
       await Hive.initFlutter();
       await Hive.openBox<Map<dynamic, dynamic>>('CurrentWeather');
-      // await Hive.openBox<Map<dynamic, dynamic>>('WeatherForecast');
-      // await Hive.openBox<Map<dynamic, dynamic>>('WeatherStations');
-    } catch (e) {
-      print('Error initializing Hive: $e');
-    }
+    } catch (e) {}
   }
 
   static Future<void> insertOrUpdateWeather(
@@ -21,11 +17,7 @@ class HiveService {
 
       // Always overwrite the same key with the latest weather data
       await box.put('currentWeather', newWeatherData);
-
-      print('Weather data updated: $newWeatherData');
-    } catch (e) {
-      print('Error updating weather data: $e');
-    }
+    } catch (e) {}
   }
 
   static Future<Map<dynamic, dynamic>?> getCurrentWeather() async {
@@ -33,7 +25,6 @@ class HiveService {
       var box = Hive.box<Map<dynamic, dynamic>>('CurrentWeather');
       return box.get('currentWeather');
     } catch (e) {
-      print('Error retrieving current weather: $e');
       return null;
     }
   }

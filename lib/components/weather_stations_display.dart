@@ -58,7 +58,6 @@ class _WeatherStationsDisplayState extends State<WeatherStationsDisplay> {
             });
           } else {
             showBottomSnackBar(context, "No data found for Faisalabad");
-            print("No data found for Faisalabad");
           }
         } else if (widget.tab == "TT Singh") {
           WeatherStationData? res = await ApiRequests.fetchWeatherStationData(
@@ -71,7 +70,6 @@ class _WeatherStationsDisplayState extends State<WeatherStationsDisplay> {
             });
           } else {
             showBottomSnackBar(context, "No data found for TT Singh");
-            print("No data found for TT Singh");
           }
         } else if (widget.tab == "Okara") {
           WeatherStationData? res = await ApiRequests.fetchWeatherStationData(
@@ -84,7 +82,6 @@ class _WeatherStationsDisplayState extends State<WeatherStationsDisplay> {
             });
           } else {
             showBottomSnackBar(context, "No data found for Okara");
-            print("No data found for Okara");
           }
         } else if (widget.tab == "Burewala") {
           WeatherStationData? res = await ApiRequests.fetchWeatherStationData(
@@ -98,18 +95,15 @@ class _WeatherStationsDisplayState extends State<WeatherStationsDisplay> {
             });
           } else {
             showBottomSnackBar(context, "No data found for Burewala");
-            print("No data found for Burewala");
           }
         } else {
           // throw Exception("Invalid tab selected");
         }
       } else {
         showBottomSnackBar(context, "No internet connection");
-        print("No internet connection");
       }
     } catch (e) {
       showBottomSnackBar(context, "Error fetching data: $e");
-      print("Error fetching data: $e");
     } finally {
       setState(() {
         isLoading = false;
@@ -135,14 +129,12 @@ class _WeatherStationsDisplayState extends State<WeatherStationsDisplay> {
         forecastMap = _forecastMap;
         if (forecastMap == null) {
           showBottomSnackBar(context, "No hourly forecast data available.");
-          print("No hourly forecast data available.");
           return;
         }
         dailyForecasts = getFirstHourlyForecasts(_forecastMap!);
         isLoading = false;
       });
     } catch (e) {
-      print("Error fetching weather: $e");
       showBottomSnackBar(context, "Error fetching weather data.");
     } finally {
       setState(() {

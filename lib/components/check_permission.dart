@@ -14,7 +14,6 @@ Future<bool> checkPermission(BuildContext context) async {
   } catch (e) {
     // If there's an error, consider permission not granted
     showLocationDialog(context);
-
     return false;
   }
 }
@@ -22,10 +21,8 @@ Future<bool> checkPermission(BuildContext context) async {
 Future<bool> getLocationFirstTime() async {
   try {
     await Geolocator.getCurrentPosition();
-    print("✅ Location granted.");
     return true;
   } catch (e) {
-    print("❌ Location denied or error: $e");
     return false;
   }
 }

@@ -64,20 +64,15 @@ class _SearchState extends State<Search> {
 
   void onSearch() async {
     if (selectedCity != null) {
-      print(
-        'Searching for city: ${selectedCity!.name} (${selectedCity!.country})',
-      );
       bool hasInternet = await InternetConnection().hasInternetAccess;
       bool res = false;
       if (hasInternet) {
         res = await getData();
       } else {
-        print('No internet connection');
         showBottomSnackBar(context, "No internet connection!");
       }
       if (res) searchController.clear();
     } else {
-      print('No city selected');
       showBottomSnackBar(context, "No city selected!");
     }
   }
@@ -347,11 +342,10 @@ class _SearchState extends State<Search> {
       } else {
         // You can show a toast/snackbar here
         showBottomSnackBar(context, "No weather data found for this city!");
-        print('No weather data found');
+
         return false;
       }
     } catch (e) {
-      print('Error fetching weather data: $e');
       showBottomSnackBar(context, "Error fetching weather data!");
       return false;
     } finally {

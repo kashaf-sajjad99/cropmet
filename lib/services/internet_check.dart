@@ -8,12 +8,10 @@ bool isConnection = true;
 void monitorInternetConnection() {
   InternetConnection().onStatusChange.listen((InternetStatus status) async {
     if (status == InternetStatus.connected) {
-      print('You are connected to the internet.');
       isConnection = true;
 
       // _showTopSnackBar('Back online!', Colors.green);
     } else if (status == InternetStatus.disconnected) {
-      print('No internet connection.');
       isConnection = false;
       _showTopSnackBar('No internet connection!', Colors.red);
     }

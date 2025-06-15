@@ -1,5 +1,6 @@
 import 'package:cropmet/components/check_permission.dart';
 import 'package:cropmet/components/dialog.dart';
+import 'package:cropmet/components/notification.dart';
 import 'package:cropmet/components/open_url.dart';
 import 'package:cropmet/screens/landing.dart';
 import 'package:cropmet/services/location_check.dart';
@@ -75,7 +76,14 @@ class _StarterScreenState extends State<StarterScreen> {
               padding: EdgeInsets.all(10),
               child: GestureDetector(
                 onTap: () {
-                  openPrivacyPolicy();
+                  try {
+                    openPrivacyPolicy();
+                  } catch (e) {
+                    showBottomSnackBar(
+                      context,
+                      "Failed to open privacy policy.",
+                    );
+                  }
                 },
                 child: Text.rich(
                   TextSpan(

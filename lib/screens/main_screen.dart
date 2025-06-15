@@ -4,7 +4,6 @@ import 'package:cropmet/components/display_box.dart';
 import 'package:cropmet/components/notification.dart';
 import 'package:cropmet/models/const.dart';
 import 'package:cropmet/models/current_weather_model.dart';
-import 'package:cropmet/models/dummy.dart';
 import 'package:cropmet/models/hourly_weather_model.dart';
 import 'package:cropmet/screens/forecast_screen.dart';
 import 'package:cropmet/services/db_hive.dart';
@@ -47,20 +46,18 @@ class _MainScreenState extends State<MainScreen> {
     });
     try {
       bool res = await checkPermission(context);
-      // print("calling perimission and check function fetch");
+
       if (res) {
         // If permission is granted, fetch the weather data
         bool hasInternet = await InternetConnection().hasInternetAccess;
-        // print("checking connection : $hasInternet");
+
         if (hasInternet) {
-          // print('caalling api');
           await getDataforRefresh();
         } else {
-          // print("cliing offline thing");
           // If no internet, show a dialog
           showBottomSnackBar(context, "No internet connection!");
           var data = await HiveService.getCurrentWeather();
-          print("fethced data from hive db : $data");
+
           CurrentWeather? fetchedData =
               data != null ? CurrentWeather.fromMap(data) : null;
           setState(() {
@@ -72,7 +69,6 @@ class _MainScreenState extends State<MainScreen> {
         showBottomSnackBar(context, "Please allow location.");
       }
     } catch (e) {
-      print("Error during permission check: $e");
       showBottomSnackBar(context, "Failed to load weather data.");
     } finally {
       setState(() {
@@ -138,11 +134,9 @@ class _MainScreenState extends State<MainScreen> {
           isLoading = false;
         });
       } catch (e) {
-        print("Error fetching weather: $e");
         showBottomSnackBar(context, "Error fetching weather data.");
       } finally {}
     } else {
-      print("Failed to get location.");
       showBottomSnackBar(context, "Failed to get location.");
     }
   }
@@ -165,11 +159,9 @@ class _MainScreenState extends State<MainScreen> {
           isLoading = false;
         });
       } catch (e) {
-        print("Error fetching weather: $e");
         showBottomSnackBar(context, "Error fetching weather data.");
       } finally {}
     } else {
-      print("Failed to get location.");
       showBottomSnackBar(context, "Failed to get location.");
     }
   }
@@ -180,20 +172,6 @@ class _MainScreenState extends State<MainScreen> {
       tomorrowData = forecastMap!.tomorrow;
       todayForecastSave = todayData ?? [];
       tomorrowForecastSave = tomorrowData ?? [];
-
-      print("📅 Today's Forecast:");
-      for (var hour in todayData!) {
-        print(
-          "🕒 ${hour.time} - ${hour.weatherMain} (${hour.weatherId}) - ${hour.temp}°C",
-        );
-      }
-
-      print("\n📅 Tomorrow's Forecast:");
-      for (var hour in tomorrowData!) {
-        print(
-          "🕒 ${hour.time} - ${hour.weatherMain} (${hour.weatherId}) - ${hour.temp}°C",
-        );
-      }
     }
   }
 

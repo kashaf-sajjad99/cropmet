@@ -54,7 +54,6 @@ class SplashScreenState extends State<SplashScreen> {
     } else {
       // Navigate to HomePage after 3 seconds, ensuring context is valid
       Future.delayed(Duration(seconds: 3), () {
-        // Check if the widget is still mounted before using context
         if (mounted) {
           Navigator.pushReplacement(
             context,
